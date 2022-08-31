@@ -65,11 +65,14 @@ public class Hero extends Creature implements Fighting {
             }
         }
         public void useItem(Bag item) {
-            if (items.containsKey(item.getDescription())){items.remove(item.getDescription());
 
 
+            if(items.containsKey(item.getDescription()) && item.getQuantity()==1){
+            items.remove(item.getDescription());
+           } else if (items.containsKey(item.getDescription()))
+            item.setQuantity(item.getQuantity()-1);
 
-            }
+
         }
     }
 }
