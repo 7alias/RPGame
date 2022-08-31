@@ -17,6 +17,8 @@ public class Hero extends Creature implements Fighting {
         this.scrollOfPower = new Merchant.ScrollOfPower();
     }
 
+
+
     public int getHealthCap() {
         return healthCap;
     }
@@ -56,6 +58,14 @@ public class Hero extends Creature implements Fighting {
         public void addItem(Bag item) {
             if (items.containsKey(item.getDescription())) {
                 items.put(item.getDescription(),
+                        items.get(item.getDescription()) + 1);
+            } else {
+                items.put(item.getDescription(), item.getQuantity());
+            }
+        }
+        public void useItem(Bag item) {
+            if (items.containsKey(item.getDescription())) {
+                items.remove(item.getDescription(),
                         items.get(item.getDescription()) + 1);
             } else {
                 items.put(item.getDescription(), item.getQuantity());

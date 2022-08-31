@@ -1,10 +1,12 @@
 public class Fight implements Runnable {
     Hero hero;
+    Hero.Backpack backpack;
     String location;
 
     public Fight(Hero hero, String location) {
         this.hero = hero;
         this.location = location;
+        this.backpack = hero.backpack;
     }
 
     @Override
@@ -21,13 +23,12 @@ public class Fight implements Runnable {
                 enemy = new Ogre();
             }
             System.out.println(enemy.getName() + " stands in front of you. Battle begins!");
-            System.out.println("hp remaining: " + hero.getHealth());
+            System.out.println("hp remaining: " + hero.getHealth() + " Strength: " + hero.getStrength() +" Agility:"+ hero.getAgility() );
             boolean isAlive = true;
             int count = 1;
             while (isAlive) {
                 System.out.printf("-------[Move %d]-------\n", count);
                 System.out.printf("""
-                                
                         Your move:
                         1. Attack
                         2. Drink health potion 
@@ -35,8 +36,8 @@ public class Fight implements Runnable {
                         """);
                 switch (Main.userInput()) {
                     case 1 -> hero.attack(enemy);
-                    case 2 -> hero.healthPotion.use(hero);
-                    case 3 -> hero.scrollOfPower.use(hero);
+                    case 2 -> {hero.healthPotion.use(hero); hero.backpack.useItem(hero.healthPotion); }
+                    case 3 -> {hero.scrollOfPower.use(hero); hero.backpack.useItem(hero.scrollOfPower);}
                     default -> System.out.println("Select option: 1, 2, 3");
                 }
                 ((Fighting) enemy).attack(hero);
