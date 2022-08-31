@@ -65,13 +65,9 @@ public class Hero extends Creature implements Fighting {
             }
         }
         public void useItem(Bag item) {
-            if (items.containsKey(item.getDescription())){
-                for(Iterator<String> iterator = items.keySet().iterator(); iterator.hasNext(); ) {
-                    String key = iterator.next();
-                    if(key.equals(items.get("healingPotion")) ) {
-                        iterator.remove();
-                    }
-                }
+            if (items.containsKey(item.getDescription())){items.remove(item.getDescription());
+
+
 
             }
         }
