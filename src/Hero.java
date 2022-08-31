@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Hero extends Creature implements Fighting {
@@ -64,11 +65,14 @@ public class Hero extends Creature implements Fighting {
             }
         }
         public void useItem(Bag item) {
-            if (items.containsKey(item.getDescription())) {
-                items.remove(item.getDescription(),
-                        items.get(item.getDescription()) + 1);
-            } else {
-                items.put(item.getDescription(), item.getQuantity());
+            if (items.containsKey(item.getDescription())){
+                for(Iterator<String> iterator = items.keySet().iterator(); iterator.hasNext(); ) {
+                    String key = iterator.next();
+                    if(key.equals(items.get("healingPotion")) ) {
+                        iterator.remove();
+                    }
+                }
+
             }
         }
     }

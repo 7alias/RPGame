@@ -1,7 +1,7 @@
 public class Tavern implements Runnable {
 
     Hero hero;
-int beerPrice = 5;
+int beerPrice = 50;
 
     public Tavern(Hero hero) {
         this.hero = hero;
@@ -22,11 +22,11 @@ int beerPrice = 5;
             switch (command) {
                 case 1 -> {
 
-                    if (hero.getGold() - beerPrice >= 0) {
+                    if (beerPrice < hero.getGold()) {
                         hero.setStrength(hero.getStrength() + 10);
                         hero.setAgility(hero.getAgility() - 3);
 
-                        hero.setGold(hero.getGold()-50);
+                        hero.setGold(hero.getGold()-beerPrice);
                         System.out.println("Received alcohol power.");
                     } else {
                         System.out.println("You don't have enough gold!\n");
